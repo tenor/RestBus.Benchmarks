@@ -1,0 +1,38 @@
+﻿{
+  "version": "1.0.0-*",
+  "compilationOptions": {
+    "emitEntryPoint": true
+  },
+
+  "dependencies": {
+    "Microsoft.AspNet.IISPlatformHandler": "1.0.0-rc2-*",
+    "Microsoft.AspNet.Mvc": "6.0.0-rc2-*",
+    "Microsoft.AspNet.Server.Kestrel": "1.0.0-rc2-*",
+    "Microsoft.AspNet.StaticFiles": "1.0.0-rc2-*",
+    "Microsoft.Extensions.Configuration.FileProviderExtensions": "1.0.0-rc2-*",
+    "Microsoft.Extensions.Configuration.Json": "1.0.0-rc2-*",
+    "Microsoft.Extensions.Logging": "1.0.0-rc2-*",
+    "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-*",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-*",
+    "Newtonsoft.Json": "8.0.1-beta3",
+    "RestBus.AspNet": "0.6.0-*",
+    "RestBus.RabbitMQ": "0.6.7-*"
+  },
+
+  "commands": {
+    "web": "RestBusAspNetTestServer"
+  },
+
+  "frameworks": {
+    "dnx452": { }
+  },
+
+  "exclude": [
+    "wwwroot",
+    "node_modules"
+  ],
+  "publishExclude": [
+    "**.user",
+    "**.vspscc"
+  ]
+}

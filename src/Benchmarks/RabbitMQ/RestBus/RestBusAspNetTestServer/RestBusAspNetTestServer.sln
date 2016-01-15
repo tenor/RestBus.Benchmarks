@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{25BE62B5-321B-45DA-AA67-B86F51B1E2E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1E32B8DB-5835-4E80-B797-5856A37415DF}"
+	ProjectSection(SolutionItems) = preProject
+		global.json = global.json
+		Performance1.psess = Performance1.psess
+		Performance2.psess = Performance2.psess
+		Performance3.psess = Performance3.psess
+		Performance4.psess = Performance4.psess
+	EndProjectSection
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "RestBusAspNetTestServer", "src\RestBusAspNetTestServer\RestBusAspNetTestServer.xproj", "{F536C20E-26EA-4321-A596-953C3EA78B58}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F536C20E-26EA-4321-A596-953C3EA78B58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F536C20E-26EA-4321-A596-953C3EA78B58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F536C20E-26EA-4321-A596-953C3EA78B58}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F536C20E-26EA-4321-A596-953C3EA78B58}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{F536C20E-26EA-4321-A596-953C3EA78B58} = {25BE62B5-321B-45DA-AA67-B86F51B1E2E1}
+	EndGlobalSection
+EndGlobal

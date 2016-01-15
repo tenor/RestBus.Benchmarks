@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBusTestClient", "NServiceBusTestClient\NServiceBusTestClient.csproj", "{5A3C6F00-0EBB-48B5-BEAD-0887A6CAF5DE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NServiceBusTestCommon", "..\NServiceBusTestCommon\NServiceBusTestCommon.csproj", "{1A7FAF03-A066-4607-BCA2-89BCDB8BA7EB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5A3C6F00-0EBB-48B5-BEAD-0887A6CAF5DE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A3C6F00-0EBB-48B5-BEAD-0887A6CAF5DE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A3C6F00-0EBB-48B5-BEAD-0887A6CAF5DE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A3C6F00-0EBB-48B5-BEAD-0887A6CAF5DE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A7FAF03-A066-4607-BCA2-89BCDB8BA7EB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A7FAF03-A066-4607-BCA2-89BCDB8BA7EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A7FAF03-A066-4607-BCA2-89BCDB8BA7EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A7FAF03-A066-4607-BCA2-89BCDB8BA7EB}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

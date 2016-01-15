@@ -1,0 +1,6 @@
+{
+  "projects": [ "src", "../../../../../Dropbox/Code/Public/RestBus/src/Frameworks/AspNet" ],
+  "sdk": {
+    "version": "1.0.0-rc2-16357"
+  }
+}
