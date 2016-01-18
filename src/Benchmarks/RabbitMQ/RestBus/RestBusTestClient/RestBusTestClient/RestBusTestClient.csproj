@@ -41,15 +41,15 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="RestBus.Client, Version=0.5.1.0, Culture=neutral, PublicKeyToken=f33c33fada5d6e6b, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestBus.Client.0.5.1-beta-1\lib\portable-net45+dnxcore50+win\RestBus.Client.dll</HintPath>
+      <HintPath>..\packages\RestBus.Client.0.5.1-rc1\lib\portable-net45+dnxcore50+win\RestBus.Client.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RestBus.Common, Version=0.6.1.0, Culture=neutral, PublicKeyToken=f33c33fada5d6e6b, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestBus.Common.0.6.1-beta-5\lib\portable-net45+dnxcore50+win\RestBus.Common.dll</HintPath>
+      <HintPath>..\packages\RestBus.Common.0.6.1-rc1\lib\portable-net45+dnxcore50+win\RestBus.Common.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="RestBus.RabbitMQ, Version=0.6.7.0, Culture=neutral, PublicKeyToken=f33c33fada5d6e6b, processorArchitecture=MSIL">
-      <HintPath>..\packages\RestBus.RabbitMQ.0.6.7-beta-9\lib\net45\RestBus.RabbitMQ.dll</HintPath>
+      <HintPath>..\packages\RestBus.RabbitMQ.0.6.7-rc1\lib\net45\RestBus.RabbitMQ.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

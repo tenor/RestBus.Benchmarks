@@ -1,4 +1,4 @@
-﻿#define BARE_TO_THE_METAL_MODE
+﻿//#define BARE_TO_THE_METAL_MODE
 
 using System;
 using System.Collections.Generic;
@@ -17,6 +17,8 @@ namespace RestBusTestServer
 {
     public class Startup
     {
+        public static int MessageSize { get; set; }
+
         public Startup(IHostingEnvironment env)
         {
             // Set up configuration sources.
@@ -45,7 +47,9 @@ namespace RestBusTestServer
                 app.UseMvc();
             #endif
 
-            var amqpUrl = Configuration["rabbitmqserver"]; //AMQP URI for RabbitMQ server
+            MessageSize = int.Parse(Configuration["MessageSize"]);
+
+            var amqpUrl = Configuration["ServerUri"]; //AMQP URI for RabbitMQ server
             var serviceName = "speedtest"; //Uniquely identifies this service
 
             var msgMapper = new BasicMessageMapper(amqpUrl, serviceName);
@@ -76,6 +80,7 @@ namespace RestBusTestServer
                 .Build();
 
             application.Run();
+
         }
     }
 }

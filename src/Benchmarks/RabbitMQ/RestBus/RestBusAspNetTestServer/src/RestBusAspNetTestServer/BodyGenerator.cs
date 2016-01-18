@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace RestBusTestServer
 {
@@ -16,7 +13,7 @@ namespace RestBusTestServer
             //Fill bodies with Random junk
             for (int i = 0; i < 10; i++)
             {
-                bodies[i] = new byte[2048];
+                bodies[i] = new byte[Startup.MessageSize];
                 rnd.NextBytes(bodies[i]);
             }
         }
