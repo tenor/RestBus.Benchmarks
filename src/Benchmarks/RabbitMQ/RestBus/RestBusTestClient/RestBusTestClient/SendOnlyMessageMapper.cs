@@ -10,10 +10,10 @@ namespace RestBusTestClient
         {
         }
 
-        public override ExchangeConfiguration GetExchangeConfig()
+        public override MessagingConfiguration GetMessagingConfig()
         {
             var connectionInfos = base.amqpHostUris.Select(u => new AmqpConnectionInfo { Uri = u, FriendlyName = base.StripUserInfoAndQuery(u) }).ToArray();
-            return new ExchangeConfiguration(connectionInfos)
+            return new MessagingConfiguration(connectionInfos)
             {
                 MessageExpires = (m) => { return false; }, //Messages never expire
                 MessageExpectsReply = (m) => { return false; } //Messages are not replied to
