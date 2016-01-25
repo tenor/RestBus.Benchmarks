@@ -14,8 +14,8 @@
     "Microsoft.Extensions.Logging.Console": "1.0.0-rc2-*",
     "Microsoft.Extensions.Logging.Debug": "1.0.0-rc2-*",
     "Newtonsoft.Json": "8.0-*",
-    "RestBus.AspNet": "0.6.0-rc1",
-    "RestBus.RabbitMQ": "0.6.7-rc1"
+    "RestBus.AspNet": "0.6.2-rc1",
+    "RestBus.RabbitMQ": "0.6.8"
   },
 
   "commands": {
