@@ -71,3 +71,4 @@ Queues must be drained before moving to a new set of tests. For example, after r
 Set client app.config *NoOfThreads* setting to 20.    
 Set client app.config *ExpectReply* to true.  
 Set server app.config *Reply* to true. *(not applicable for RestBus servers)* 
+Set server app.config *MessageSize* setting to 200.
