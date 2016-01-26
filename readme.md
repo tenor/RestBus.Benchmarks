@@ -2,7 +2,7 @@
 
 This project tracks various throughput benchmarks for RestBus in comparison with other messaging libraries.
 
-The Excel sheets with the data and charts are in the [[data]] folder.
+The Excel sheets with the data and charts are in the [data](data) folder.
 
 ### One Way RPC Throughput Test Results
 
