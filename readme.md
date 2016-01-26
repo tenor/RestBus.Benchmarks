@@ -46,7 +46,7 @@ The throughput measured is one way. i.e. from client to server.
 
 ### Send Only Throughput Test ###
 
-This test measures how many 2048 byte messages can be sent rapidly by a publisher, with one server processing the queue.
+This test measures how many 2048 byte messages can be sent rapidly by a client, with one server consuming the queue.
 
 ![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/sendonly_throughput_20_threads.png)
 
