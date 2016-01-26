@@ -1,9 +1,78 @@
 # RestBus.Benchmarks #
 
-This project tracks various throughput benchmarks for RestBus in comparison with other messaging libraries.
+This project tracks various benchmarks for RestBus in comparison with other messaging libraries.
 
 The Excel sheets with the data and charts are in the [data](data) folder.
 
-### One Way RPC Throughput Test Results
+These tests were ran in AWS East Region on three m4.4xlarge (16 vcpus, 64 Gib memory, 2000 Mbps throughput) Windows Server 2012 R2 machines.
+
+One machine runs RabbitMQ server with the 6 default plugins. One machine runs a test server and the last one, a test client. 
+
+```csharp
+public class Message
+{
+    public byte[] Body;
+}
+```
+
+#### Test Notes ####
+
+All charts are log charts.
+
+**Mass Transit**
+
+- All consumers are set to have a [prefetch count](https://www.rabbitmq.com/consumer-prefetch.html) of 50, however MassTransit consumer prefetch count is a global one.  
+- Mass Transit's consumers have [publisher confirms](https://www.rabbitmq.com/confirms.html) turned on, and there seems to be no way to turn it off.  
+- There seems to be no way to use Transient queues in MassTransit (RPC) clients; there also seems to be no way to use non-persistent messaging (delivery mode) over durable queues; therefore in this tests, MassTransit messages were persistent.  
+
+These factors may have adversely affected MassTransit's performance.
+
+**NServiceBus**
+
+- Increasing the test thread count did not make any difference in results.
+- Increasing [MaximumConcurrencyLevel](https://web.archive.org/web/20160126031741/http://docs.particular.net/nservicebus/operations/tuning) setting increased the number of threads used by NServiceBus but had no effect on throughput. 
+
+This may be a licensing issue, but [this suggests otherwise](https://web.archive.org/web/20150503165259/http://docs.particular.net/nservicebus/licensing/licensing-limitations).
+
+
+**RestBus**
+
+ASP.Net 5 "Bare to the metal mode" means the MVC pipeline was skipped. [Define this symbol to set the mode](https://github.com/tenor/RestBus.Benchmarks/blob/56c801a61874133e26339674fc5894ec0bbb45ba/src/Benchmarks/RabbitMQ/RestBus/RestBusAspNetTestServer/src/RestBusAspNetTestServer/Startup.cs#L1).
+
+## Test Results ##
+
+### Ease of Use Test ###
+
+|*             |             |
+|--------------|-------------|
+| RestBus      | Easy        |
+| EasyNetQ     | Easy        |
+| MassTransit  | Moderate    |
+| NServiceBus  | Cumbersome  |
+
+
+### One Way RPC Throughput Test ###
+
+This test measures how many 2048 byte messages can be sent on a round-trip from one publisher to one subscriber and back.
+The throughput measured is one way. i.e from client to server.
 
 ![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/rpc_throughput_20_threads.png)
+
+
+![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/rpc_throughput_all_threads.png)
+
+### Send Only Throughput Test ###
+
+This test measures how many 2048 byte messages can be sent rapidly by a publisher, with one server processing the queue.
+
+![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/sendonly_throughput_20_threads.png)
+
+![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/sendonly_throughput_all_threads.png)
+
+### Payload Throughput Test ###
+
+This test measures how many MB/s can be sent by a client to a server with payload sizes, in an RPC manner.
+The client sends a message and the server responds with a 200 byte message.  
+The objective is to simulate scenarios where a client sends a large file, the server receives it and responds with "OK".
+
+![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/payload_throughput_20_threads.png)
