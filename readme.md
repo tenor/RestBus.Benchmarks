@@ -37,7 +37,7 @@ ASP.Net 5 "Bare to the metal mode" means the MVC pipeline was skipped. [Define t
 ### One Way RPC Throughput Test
 
 This test measures how many 2048 byte messages can be sent on a round-trip from one publisher to one subscriber and back.
-The throughput measured is one way. i.e from client to server.
+The throughput measured is one way. i.e. from client to server.
 
 ![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/rpc_throughput_20_threads.png)
 
@@ -54,9 +54,9 @@ This test measures how many 2048 byte messages can be sent rapidly by a publishe
 
 ### Payload Throughput Test
 
-This test measures how many MB/s can be sent by a client to a server with payload sizes, in an RPC manner.
+This test measures how many MB/s can be sent by a client to a server with varying payload sizes, in an RPC manner.
 The client sends a message and the server responds with a 200 byte message.  
-The objective is to measure how efficient it is for a client to send a large file to the server, and the server responsing with "OK".
+The objective is to measure how efficient it is for a client to send large files to the server, with the server responsing with "OK" once file is completely received.
 
 ![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/payload_throughput_20_threads.png)
 
