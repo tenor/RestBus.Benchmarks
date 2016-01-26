@@ -64,7 +64,7 @@ The objective is to simulate scenarios where a client sends a large file, the se
 
 | Library      | Difficulty  |
 |--------------|-------------|
-| RestBus      | <span style='color:green';>Easy</span>        |
+| RestBus      | Easy        |
 | EasyNetQ     | Easy        |
 | MassTransit  | Moderate    |
 | NServiceBus  | Cumbersome  |
