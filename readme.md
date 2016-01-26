@@ -1,11 +1,11 @@
 ## Welcome to RestBus.Benchmarks ##
 
-This project tracks various benchmarks for RestBus in comparison with other messaging libraries.
+This project tracks various benchmarks for RestBus and other messaging libraries.
 
 The excel sheets with the measurement data and generated charts are in the [data](data) folder.
 The source code for the test projects are in the [src](src) folder.
 
-These tests were ran in AWS Cloud East Region on three m4.4xlarge (16 vcpus, 64 Gib memory, 2000 Mbps network throughput) Windows Server 2012 R2 machines.
+These tests were ran in AWS Cloud East Region on three m4.4xlarge (16 vcpus, 64 GiB memory, 2000 Mbps network throughput) Windows Server 2012 R2 machines.
 
 One machine runs RabbitMQ server with the 6 default management-related plugins. 
 The test server is ran on another machine and the test client on the third one.
