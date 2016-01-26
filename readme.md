@@ -31,7 +31,9 @@ This may be a licensing issue, but [this suggests otherwise](https://web.archive
 
 **RestBus**
 
-ASP.Net 5 "Bare to the metal mode" means the MVC pipeline was skipped. [Define this symbol to set the mode](https://github.com/tenor/RestBus.Benchmarks/blob/56c801a61874133e26339674fc5894ec0bbb45ba/src/Benchmarks/RabbitMQ/RestBus/RestBusAspNetTestServer/src/RestBusAspNetTestServer/Startup.cs#L1).
+- ASP.Net 5 "Bare to the metal mode" means the MVC pipeline was skipped. [Define this symbol to set the mode](https://github.com/tenor/RestBus.Benchmarks/blob/56c801a61874133e26339674fc5894ec0bbb45ba/src/Benchmarks/RabbitMQ/RestBus/RestBusAspNetTestServer/src/RestBusAspNetTestServer/Startup.cs#L1).
+
+- Consumer No-Ack is false for the server but true for the client since No-Ack is required for the [Direct Reply-to](https://www.rabbitmq.com/direct-reply-to.html) feature, which RestBus uses.
 
 ## Test Results
 ### One Way RPC Throughput Test
