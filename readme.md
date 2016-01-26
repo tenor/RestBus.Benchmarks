@@ -7,7 +7,7 @@ The source code for the test projects are in the [src](src) folder.
 
 These tests were ran in AWS Cloud East Region on three m4.4xlarge (16 vcpus, 64 GiB memory, 2000 Mbps network throughput) Windows Server 2012 R2 machines.
 
-One machine runs RabbitMQ server with the 6 default management-related plugins. 
+One machine runs the RabbitMQ server with the 6 default management-related plugins. 
 The test server is ran on another machine and the test client on the third one.
 
 See the [test plan](test_plan.md) for more information about the tests.
