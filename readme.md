@@ -1,9 +1,11 @@
+## Welcome to RestBus.Benchmarks ##
+
 This project tracks various benchmarks for RestBus in comparison with other messaging libraries.
 
-The Excel sheets with the measurement data and generated charts are in the [data](data) folder.
+The excel sheets with the measurement data and generated charts are in the [data](data) folder.
 The source code for the test projects are in the [src](src) folder.
 
-These tests were ran in AWS Cloud East Region on three m4.4xlarge (16 vcpus, 64 Gib memory, 2000 Mbps throughput) Windows Server 2012 R2 machines.
+These tests were ran in AWS Cloud East Region on three m4.4xlarge (16 vcpus, 64 Gib memory, 2000 Mbps network throughput) Windows Server 2012 R2 machines.
 
 One machine runs RabbitMQ server with the 6 default management-related plugins. 
 The test server is ran on another machine and the test client on the third one.
@@ -14,9 +16,9 @@ See the [test plan](test_plan.md) for more information about the tests.
 
 **Mass Transit**
 
-- All consumers are set to have a [prefetch count](https://www.rabbitmq.com/consumer-prefetch.html) of 50, however MassTransit consumer prefetch count is a global one.  
+- All consumers are set to have a [prefetch count](https://www.rabbitmq.com/consumer-prefetch.html) of 50, however MassTransit consumer prefetch count is a global.  
 - Mass Transit's consumers have [publisher confirms](https://www.rabbitmq.com/confirms.html) turned on, and there seems to be no way to turn it off.  
-- There seems to be no way to use Transient queues in MassTransit (RPC) clients; there also seems to be no way to use non-persistent messaging (delivery mode) over durable queues; therefore in this tests, MassTransit messages were persistent.  
+- There seems to be no way to use transient queues in MassTransit (RPC) clients; there also seems to be no way to use non-persistent messaging (delivery mode) over durable queues; therefore in these tests, MassTransit messages were persistent.  
 
 These factors may have adversely affected MassTransit's performance.
 
@@ -32,16 +34,6 @@ This may be a licensing issue, but [this suggests otherwise](https://web.archive
 ASP.Net 5 "Bare to the metal mode" means the MVC pipeline was skipped. [Define this symbol to set the mode](https://github.com/tenor/RestBus.Benchmarks/blob/56c801a61874133e26339674fc5894ec0bbb45ba/src/Benchmarks/RabbitMQ/RestBus/RestBusAspNetTestServer/src/RestBusAspNetTestServer/Startup.cs#L1).
 
 ## Test Results ##
-
-### Ease of Use Test ###
-
-|--------------|-------------|
-| RestBus      | <span style="color:green;" >Easy</span>        |
-| EasyNetQ     | Easy        |
-| MassTransit  | Moderate    |
-| NServiceBus  | Cumbersome  |
-
-
 ### One Way RPC Throughput Test ###
 
 This test measures how many 2048 byte messages can be sent on a round-trip from one publisher to one subscriber and back.
@@ -67,3 +59,12 @@ The client sends a message and the server responds with a 200 byte message.
 The objective is to simulate scenarios where a client sends a large file, the server receives it and responds with "OK".
 
 ![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/payload_throughput_20_threads.png)
+
+### Ease of Use Test ###
+
+|--------------|-------------|
+| RestBus      | Easy        |
+| EasyNetQ     | Easy        |
+| MassTransit  | Moderate    |
+| NServiceBus  | Cumbersome  |
+
