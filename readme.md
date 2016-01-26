@@ -56,7 +56,7 @@ This test measures how many 2048 byte messages can be sent rapidly by a publishe
 
 This test measures how many MB/s can be sent by a client to a server with varying payload sizes, in an RPC manner.
 The client sends a message and the server responds with a 200 byte message.  
-The objective is to measure how efficient it is for a client to send large files to the server, with the server responsing with "OK" once file is completely received.
+The objective is to measure how efficient it is for a client to send files of various sizes to the server. The server responds with a message equivalent to "OK" once the file is completely received.
 
 ![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/payload_throughput_20_threads.png)
 
