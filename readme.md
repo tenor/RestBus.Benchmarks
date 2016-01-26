@@ -63,7 +63,7 @@ The objective is to measure the efficiency of scenarios where a client send file
 
 ![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/payload_throughput_20_threads.png)
 
-### Ease of Rating
+### Ease of Use Rating
 
 | Library      | Difficulty  |
 |--------------|-------------|
