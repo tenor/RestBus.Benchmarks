@@ -33,8 +33,8 @@ This may be a licensing issue, but [this suggests otherwise](https://web.archive
 
 ASP.Net 5 "Bare to the metal mode" means the MVC pipeline was skipped. [Define this symbol to set the mode](https://github.com/tenor/RestBus.Benchmarks/blob/56c801a61874133e26339674fc5894ec0bbb45ba/src/Benchmarks/RabbitMQ/RestBus/RestBusAspNetTestServer/src/RestBusAspNetTestServer/Startup.cs#L1).
 
-## Test Results ##
-### One Way RPC Throughput Test ###
+## Test Results
+### One Way RPC Throughput Test
 
 This test measures how many 2048 byte messages can be sent on a round-trip from one publisher to one subscriber and back.
 The throughput measured is one way. i.e from client to server.
@@ -52,7 +52,7 @@ This test measures how many 2048 byte messages can be sent rapidly by a publishe
 
 ![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/sendonly_throughput_all_threads.png)
 
-### Payload Throughput Test ###
+### Payload Throughput Test
 
 This test measures how many MB/s can be sent by a client to a server with payload sizes, in an RPC manner.
 The client sends a message and the server responds with a 200 byte message.  
@@ -60,7 +60,7 @@ The objective is to simulate scenarios where a client sends a large file, the se
 
 ![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/payload_throughput_20_threads.png)
 
-### Ease of Use Test ###
+### Ease of Use Test
 
 |--------------|-------------|
 | RestBus      | Easy        |
