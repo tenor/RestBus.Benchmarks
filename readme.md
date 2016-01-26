@@ -7,7 +7,7 @@ The source code for the test projects are in the [src](src) folder.
 
 These tests were ran in AWS Cloud East Region on three m4.4xlarge (16 vcpus, 64 GiB memory, 2000 Mbps network throughput) Windows Server 2012 R2 machines.
 
-One machine runs the RabbitMQ server with the 6 default management-related plugins. 
+One machine runs the RabbitMQ server with the 6 default management related plugins. 
 The test server is ran on another machine and the test client on the third one.
 
 See the [test plan](test_plan.md) for more information about the tests.
@@ -56,7 +56,7 @@ This test measures how many 2048 byte messages can be sent rapidly by a publishe
 
 This test measures how many MB/s can be sent by a client to a server with payload sizes, in an RPC manner.
 The client sends a message and the server responds with a 200 byte message.  
-The objective is to simulate scenarios where a client sends a large file, the server receives it and responds with "OK".
+The objective is to measure how efficient it is for a client to send a large file to the server, and the server responsing with "OK".
 
 ![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/payload_throughput_20_threads.png)
 
@@ -68,5 +68,3 @@ The objective is to simulate scenarios where a client sends a large file, the se
 | EasyNetQ     | Easy        |
 | MassTransit  | Moderate    |
 | NServiceBus  | Cumbersome  |
-
-
