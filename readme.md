@@ -6,4 +6,4 @@ The Excel sheets with the data and charts are in the [[data]] folder.
 
 ### One Way RPC Throughput Test Results
 
-[[images/RabbitMQ/rpc_throughput_20_threads.png]]
+![One Way RPC Test Results](https://raw.githubusercontent.com/tenor/RestBus.Benchmarks/master/images/RabbitMQ/rpc_throughput_20_threads.png)
