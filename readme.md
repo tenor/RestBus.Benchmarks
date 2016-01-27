@@ -5,7 +5,7 @@ This project tracks various benchmarks for [RestBus](https://github.com/tenor/Re
 The excel sheets with the measurement data and generated charts are in the [data](data) folder.  
 The source code for the test projects are in the [src](src) folder.
 
-These tests were ran in AWS Cloud East Region on three m4.4xlarge (16 vcpus, 64 GiB memory, 2000 Mbps network throughput) Windows Server 2012 R2 machines.
+These tests were ran in AWS Cloud East Region on three m4.4xlarge (16 vcpus, 64 GiB memory, 2000 Mbps network throughput) Windows Server 2012 R2 shared EC2 instances.
 
 One machine runs the RabbitMQ server with the 6 default management related plugins. 
 The test server is ran on another machine and the test client on the third one.
