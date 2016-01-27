@@ -4,7 +4,7 @@ January 16 2016.
 ### Test Environment
 
 AWS East Region.  
-Three m4.4xlarge (16 vcpus, 64 GiB memory, 2000 Mbps network throughput) Windows Server 2012 R2 EC2 instances.  
+Three m4.4xlarge (16 vcpus, 64 GiB memory, 2000 Mbps network throughput) Windows Server 2012 R2 shared EC2 instances.  
 Machine 1: Running RabbitMQ server version 3.6.0 (with 6 default management related plugins)  
 Machine 2: Runs test servers.  
 Machine 3: Runs test clients.
