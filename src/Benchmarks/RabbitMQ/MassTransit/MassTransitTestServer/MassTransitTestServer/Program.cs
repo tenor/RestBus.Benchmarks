@@ -16,13 +16,16 @@ namespace MassTransitTestServer
                {
                    h.Username(ConfigurationManager.AppSettings["Username"]);
                    h.Password(ConfigurationManager.AppSettings["Password"]);
-
                });
 
-               cfg.ReceiveEndpoint(host, "masstransit_message_service", e =>
+               bool durable;
+               bool.TryParse(ConfigurationManager.AppSettings["Durable"] ?? "false", out durable);
+               
+               var queueName = durable ? "masstransit_message_service" : "masstransit_message_service_express";
+               cfg.ReceiveEndpoint(host, queueName, e =>
                {
-                   //e.AutoDelete = true; //Client doesn't play well with this setting!
-                   //e.Durable = false; //Client doesn't play well with this setting!
+                   e.AutoDelete = !durable; 
+                   e.Durable = durable;
                    e.PrefetchCount = 50;
                    e.Consumer<MessageConsumer>();
                });
@@ -38,7 +41,7 @@ namespace MassTransitTestServer
 
     public class MessageConsumer : IConsumer<Message>
     {
-        static bool reply = bool.Parse(ConfigurationManager.AppSettings["Reply"]);
+        private static bool reply = bool.Parse(ConfigurationManager.AppSettings["Reply"] ?? "false");
 
         public async Task Consume(ConsumeContext<Message> context)
         {

@@ -1,25 +1,20 @@
-﻿using MassTransit;
-using MassTransitTestCommon;
-using System;
+﻿using System;
 using System.Configuration;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using MassTransit;
+using MassTransitTestCommon;
 
 namespace MassTransitTestClient
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
+            var taskCount = int.Parse(ConfigurationManager.AppSettings["NoOfThreads"]);
+
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
-                //Commented out settings below had no effect on client
-                //cfg.AutoDelete = true;
-                //cfg.Durable = false;
-                //cfg.SetQueueArgument("durable", false);
-
-                //Also there seems to be no way to turn off publisher confirms.
-
                 cfg.PrefetchCount = 50;
 
                 var host = cfg.Host(new Uri(ConfigurationManager.AppSettings["ServerUri"]), h =>
@@ -29,12 +24,18 @@ namespace MassTransitTestClient
                 });
             });
 
+            bool durable;
+            bool.TryParse(ConfigurationManager.AppSettings["Durable"] ?? "false", out durable);
+
             busControl.Start();
             var timeout = TimeSpan.FromSeconds(60);
-            var serviceUri = new Uri(ConfigurationManager.AppSettings["ServerUri"] + "masstransit_message_service");
-            var expectReply = Boolean.Parse(ConfigurationManager.AppSettings["ExpectReply"]);
-            var taskCount = Int32.Parse(ConfigurationManager.AppSettings["NoOfThreads"]);
-            var iterationsPerTask = Int32.Parse(ConfigurationManager.AppSettings["MessagesPerThread"]);
+            var serviceUri =
+                new Uri(ConfigurationManager.AppSettings["ServerUri"] +
+                        (durable
+                            ? "masstransit_message_service"
+                            : "masstransit_message_service_express?durable=false&autodelete=true"));
+            var expectReply = bool.Parse(ConfigurationManager.AppSettings["ExpectReply"]);
+            var iterationsPerTask = int.Parse(ConfigurationManager.AppSettings["MessagesPerThread"]);
 
             IRequestClient<Message, Message> client = null;
             if (expectReply)
@@ -42,32 +43,31 @@ namespace MassTransitTestClient
                 client = busControl.CreateRequestClient<Message, Message>(serviceUri, timeout);
             }
 
-            Task[] tasks = new Task[taskCount];
-            for (int t = 0; t < taskCount; t++)
+            var tasks = new Task[taskCount];
+            for (var t = 0; t < taskCount; t++)
             {
                 tasks[t] = new Task(() =>
                 {
                     Message msg;
-                    for (int i = 0; i < iterationsPerTask; i++)
+                    for (var i = 0; i < iterationsPerTask; i++)
                     {
-                        msg = new Message { Body = BodyGenerator.GetNext() };
+                        msg = new Message {Body = BodyGenerator.GetNext()};
                         if (expectReply)
                         {
                             var res = client.Request(msg).Result;
                         }
                         else
                         {
-                            busControl.Publish<Message>(msg).Wait();
+                            busControl.Publish(msg).Wait();
                         }
                     }
-
                 }, TaskCreationOptions.LongRunning);
             }
 
-            Console.WriteLine("Sending " + iterationsPerTask * taskCount + " messages across " + taskCount + " threads");
-            Stopwatch watch = new Stopwatch();
+            Console.WriteLine("Sending " + iterationsPerTask*taskCount + " messages across " + taskCount + " threads");
+            var watch = new Stopwatch();
             watch.Start();
-            for (int t = 0; t < taskCount; t++)
+            for (var t = 0; t < taskCount; t++)
             {
                 tasks[t].Start();
             }
@@ -79,7 +79,6 @@ namespace MassTransitTestClient
 
             Console.ReadKey();
             busControl.Stop();
-
         }
     }
 }
