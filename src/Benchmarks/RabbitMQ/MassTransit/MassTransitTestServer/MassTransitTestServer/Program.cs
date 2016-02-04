@@ -26,7 +26,7 @@ namespace MassTransitTestServer
                {
                    e.AutoDelete = !durable; 
                    e.Durable = durable;
-                   e.PrefetchCount = 100;
+                   e.PrefetchCount = 50;
                    e.Consumer<MessageConsumer>();
                });
            });

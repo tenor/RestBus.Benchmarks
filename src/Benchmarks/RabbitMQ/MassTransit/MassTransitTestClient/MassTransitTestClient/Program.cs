@@ -15,7 +15,7 @@ namespace MassTransitTestClient
 
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
-                cfg.PrefetchCount = 100;
+                cfg.PrefetchCount = 50;
 
                 var host = cfg.Host(new Uri(ConfigurationManager.AppSettings["ServerUri"]), h =>
                 {
