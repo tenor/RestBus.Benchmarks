@@ -18,14 +18,13 @@ namespace MassTransitTestServer
                    h.Password(ConfigurationManager.AppSettings["Password"]);
                });
 
-               bool durable;
-               bool.TryParse(ConfigurationManager.AppSettings["Durable"] ?? "false", out durable);
-               
-               var queueName = durable ? "masstransit_message_service" : "masstransit_message_service_express";
+               var reply = bool.Parse(ConfigurationManager.AppSettings["Reply"] ?? "false");
+
+               var queueName = !reply ? "masstransit_message_service" : "masstransit_message_service_rpc";
                cfg.ReceiveEndpoint(host, queueName, e =>
                {
-                   e.AutoDelete = !durable; 
-                   e.Durable = durable;
+                   e.AutoDelete = true; 
+                   e.Durable = false;
                    e.PrefetchCount = 50;
                    e.Consumer<MessageConsumer>();
                });

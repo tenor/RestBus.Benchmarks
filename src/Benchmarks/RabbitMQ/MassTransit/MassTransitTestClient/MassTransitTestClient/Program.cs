@@ -16,6 +16,8 @@ namespace MassTransitTestClient
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
                 cfg.PrefetchCount = 50;
+                cfg.Durable = false;
+                cfg.AutoDelete = true;
 
                 var host = cfg.Host(new Uri(ConfigurationManager.AppSettings["ServerUri"]), h =>
                 {
@@ -24,17 +26,14 @@ namespace MassTransitTestClient
                 });
             });
 
-            bool durable;
-            bool.TryParse(ConfigurationManager.AppSettings["Durable"] ?? "false", out durable);
-
             busControl.Start();
             var timeout = TimeSpan.FromSeconds(60);
+            var expectReply = bool.Parse(ConfigurationManager.AppSettings["ExpectReply"]);
             var serviceUri =
                 new Uri(ConfigurationManager.AppSettings["ServerUri"] +
-                        (durable
+                        (!expectReply
                             ? "masstransit_message_service"
-                            : "masstransit_message_service_express?durable=false&autodelete=true"));
-            var expectReply = bool.Parse(ConfigurationManager.AppSettings["ExpectReply"]);
+                            : "masstransit_message_service_rpc?durable=false&autodelete=true"));
             var iterationsPerTask = int.Parse(ConfigurationManager.AppSettings["MessagesPerThread"]);
 
             IRequestClient<Message, Message> client = null;
