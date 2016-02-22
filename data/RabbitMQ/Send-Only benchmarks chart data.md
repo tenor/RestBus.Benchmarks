@@ -20,11 +20,11 @@
 | RestBus (ASP.NET 5)                      | 2.98415                 | 7.38205  | 12.013    | 28.95435  |   | 16755.19                         | 13546.37 | 16648.63 | 13814.85 |   | 33510.38                   | 27092.75 | 33297.26 | 27629.7  |
 | RestBus (ASP.NET 5 -- Bare to the metal) | 2.86255                 | 6.20995  | 11.2422   | 28.1336   |   | 17466.94                         | 16103.19 | 17790.11 | 14217.87 |   | 34933.89                   | 32206.38 | 35580.22 | 28435.75 |
 | EasyNetQ                                 | 2.6086                  | 5.33835  | 11.131275 | 22.006625 |   | 19167.37                         | 18732.38 | 17967.39 | 18176.34 |   | 38334.74                   | 37464.76 | 35934.79 | 36352.69 |
-| MassTransit                              | 25.4128                 | 33.71485 | 50.0037   | 86.6202   |   | 1967.51                          | 2966.05  | 3999.7   | 4617.86  |   | 3935.02                    | 5932.1   | 7999.41  | 9235.72  |
+| MassTransit                              | 4.9938                  | 9.81995  | 19.7063   | 36.7699   |   | 10012.42                         | 10183.35 | 10149.04 | 10878.46 |   | 20024.83                   | 20366.7  | 20298.08 | 21756.93 |
 | NServiceBus                              | 19.14465                | 33.5144  | 66.1058   | 132.45355 |   | 2611.7                           | 2983.79  | 3025.45  | 3019.93  |   | 5223.39                    | 5967.58  | 6050.91  | 6039.85  |    
 
 
 
 **Notes**  
 - Queues are drained between tests.  
-- The message size is doubled for the first two RestBus and EasyNetQ tests, so that the test period is not too short (<3 secs) and the results are more reliable.
+- The message size is doubled for the first two RestBus, EasyNetQ and MassTransit tests, so that the test period is not too short (<3 secs) and the results are more reliable.

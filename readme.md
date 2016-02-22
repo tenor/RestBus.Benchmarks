@@ -18,9 +18,6 @@ See the [test plan](test_plan.md) for more information about the tests.
 
 - All consumers are set to have a [prefetch count](https://www.rabbitmq.com/consumer-prefetch.html) of 50, however MassTransit's consumer prefetch count is global.  
 - MassTransit's consumers have [publisher confirms](https://www.rabbitmq.com/confirms.html) turned on, and there seems to be no way to turn it off.  
-- There seems to be no way to use transient queues in MassTransit (RPC) clients; there also seems to be no way to use non-persistent messaging (delivery mode) over durable queues; therefore in these tests, MassTransit messages were persistent.  
-
-These factors may have adversely affected MassTransit's performance.
 
 **NServiceBus**
 
