@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawRabbit.Common", "RawRabbit.Common\RawRabbit.Common.csproj", "{ADC7A26D-706D-419F-9ADD-BB51E74F1A0F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawRabbit.Client", "RawRabbit.Client\RawRabbit.Client.csproj", "{964510FA-B26F-4AA6-98A6-D13221DC507A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RawRabbit.Server", "RawRabbit.Server\RawRabbit.Server.csproj", "{6FFE6C54-77C9-4B3A-A806-DE261D179456}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADC7A26D-706D-419F-9ADD-BB51E74F1A0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADC7A26D-706D-419F-9ADD-BB51E74F1A0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADC7A26D-706D-419F-9ADD-BB51E74F1A0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADC7A26D-706D-419F-9ADD-BB51E74F1A0F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{964510FA-B26F-4AA6-98A6-D13221DC507A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{964510FA-B26F-4AA6-98A6-D13221DC507A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{964510FA-B26F-4AA6-98A6-D13221DC507A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{964510FA-B26F-4AA6-98A6-D13221DC507A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FFE6C54-77C9-4B3A-A806-DE261D179456}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FFE6C54-77C9-4B3A-A806-DE261D179456}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FFE6C54-77C9-4B3A-A806-DE261D179456}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FFE6C54-77C9-4B3A-A806-DE261D179456}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
