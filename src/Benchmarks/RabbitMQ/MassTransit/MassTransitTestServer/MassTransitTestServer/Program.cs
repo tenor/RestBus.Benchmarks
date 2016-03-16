@@ -18,6 +18,8 @@ namespace MassTransitTestServer
                    h.Password(ConfigurationManager.AppSettings["Password"]);
                });
 
+               cfg.PublisherConfirmation = false;
+
                var reply = bool.Parse(ConfigurationManager.AppSettings["Reply"] ?? "false");
 
                var queueName = !reply ? "masstransit_message_service" : "masstransit_message_service_rpc";

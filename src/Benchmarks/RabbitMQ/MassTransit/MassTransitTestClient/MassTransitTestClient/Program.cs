@@ -18,6 +18,7 @@ namespace MassTransitTestClient
                 cfg.PrefetchCount = 50;
                 cfg.Durable = false;
                 cfg.AutoDelete = true;
+                cfg.PublisherConfirmation = false;
 
                 var host = cfg.Host(new Uri(ConfigurationManager.AppSettings["ServerUri"]), h =>
                 {
