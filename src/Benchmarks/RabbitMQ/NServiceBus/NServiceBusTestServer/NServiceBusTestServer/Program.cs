@@ -1,60 +1,61 @@
-﻿using NServiceBus;
-using NServiceBus.Logging;
-using NServiceBusTestCommon;
-using System;
-using System.Configuration;
-
-namespace NServiceBusTestServer
+﻿namespace NServiceBusTestServer
 {
+    using System;
+    using System.Configuration;
+    using System.Threading.Tasks;
+    using NServiceBus;
+    using NServiceBus.Logging;
+    using NServiceBusTestCommon;
+
+
     class Program
     {
         static void Main(string[] args)
         {
-
             LogManager.Use<DefaultFactory>().Level(LogLevel.Fatal); //Comment out to see log messages.
-            BusConfiguration busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("nservicebus_test_service");
+            var busConfiguration = new EndpointConfiguration("nservicebus_test_service");
             busConfiguration.UseTransport<RabbitMQTransport>()
-                .ConnectionString(ConfigurationManager.AppSettings["ServerConnectionString"]);
+                .ConnectionString(ConfigurationManager.AppSettings["ServerConnectionString"])
+                .PrefetchCount(50)
+                .UsePublisherConfirms(false);
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.EnableInstallers();
             busConfiguration.UsePersistence<InMemoryPersistence>();
             busConfiguration.DisableDurableMessages();
-            busConfiguration.DiscardFailedMessagesInsteadOfSendingToErrorQueue();
+            busConfiguration.SendFailedMessagesTo("poop");
 
-            using (IBus bus = Bus.Create(busConfiguration).Start())
-            {
-                Console.WriteLine("Server started ... Press any key to exit");
-                Console.ReadKey();
-            }
+            var startableBus = Endpoint.Create(busConfiguration).Result;
+
+            var bus = startableBus.Start().Result;
+
+            Console.WriteLine("Server started ... Press any key to exit");
+            Console.ReadKey();
+
+            bus.Stop().Wait();
         }
     }
 
-    public class RequestDataMessageHandler : IHandleMessages<Message>
+
+    public class RequestDataMessageHandler :
+        IHandleMessages<Message>
     {
         static bool reply = bool.Parse(ConfigurationManager.AppSettings["Reply"]);
 
-        IBus bus;
-
-        public RequestDataMessageHandler(IBus bus)
-        {
-            this.bus = bus;
-        }
-
-        public void Handle(Message message)
+        public async Task Handle(Message message, IMessageHandlerContext context)
         {
             if (reply)
             {
-                Message response = new Message
+                var response = new Message
                 {
                     Body = BodyGenerator.GetNext()
                 };
 
-                bus.Reply(response);
+                context.Reply(response);
             }
         }
+
+        public void Handle(Message message)
+        {
+        }
     }
-
-
-
 }
