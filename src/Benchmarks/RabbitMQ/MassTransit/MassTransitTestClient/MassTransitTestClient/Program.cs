@@ -13,9 +13,13 @@ namespace MassTransitTestClient
         {
             var taskCount = int.Parse(ConfigurationManager.AppSettings["NoOfThreads"]);
 
+            var prefetchCount = ushort.Parse(ConfigurationManager.AppSettings["PrefetchCount"] ?? "50");
+
+            var publisherConfirmation = bool.Parse(ConfigurationManager.AppSettings["PublisherConfirmation"] ?? "true");
+
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
-                cfg.PrefetchCount = 50;
+                cfg.PrefetchCount = prefetchCount;
                 cfg.Durable = false;
                 cfg.AutoDelete = true;
 
@@ -23,6 +27,8 @@ namespace MassTransitTestClient
                 {
                     h.Username(ConfigurationManager.AppSettings["Username"]);
                     h.Password(ConfigurationManager.AppSettings["Password"]);
+
+                    h.PublisherConfirmation = publisherConfirmation;
                 });
             });
 
@@ -32,14 +38,19 @@ namespace MassTransitTestClient
             var serviceUri =
                 new Uri(ConfigurationManager.AppSettings["ServerUri"] +
                         (!expectReply
-                            ? "masstransit_message_service"
+                            ? "masstransit_message_service?durable=false&autodelete=true"
                             : "masstransit_message_service_rpc?durable=false&autodelete=true"));
             var iterationsPerTask = int.Parse(ConfigurationManager.AppSettings["MessagesPerThread"]);
 
+            ISendEndpoint endpoint = null;
             IRequestClient<Message, Message> client = null;
             if (expectReply)
             {
                 client = busControl.CreateRequestClient<Message, Message>(serviceUri, timeout);
+            }
+            else
+            {
+                endpoint = busControl.GetSendEndpoint(serviceUri).Result;
             }
 
             var tasks = new Task[taskCount];
@@ -53,11 +64,11 @@ namespace MassTransitTestClient
                         msg = new Message {Body = BodyGenerator.GetNext()};
                         if (expectReply)
                         {
-                            var res = client.Request(msg).Result;
+                            client.Request(msg).Wait();
                         }
                         else
                         {
-                            busControl.Publish(msg).Wait();
+                            endpoint.Send(msg).Wait();
                         }
                     }
                 }, TaskCreationOptions.LongRunning);

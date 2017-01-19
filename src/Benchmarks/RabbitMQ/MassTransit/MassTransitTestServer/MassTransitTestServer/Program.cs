@@ -1,34 +1,36 @@
-﻿using MassTransit;
-using MassTransitTestCommon;
-using System;
-using System.Configuration;
-using System.Threading.Tasks;
-
-namespace MassTransitTestServer
+﻿namespace MassTransitTestServer
 {
+    using System;
+    using System.Configuration;
+    using System.Threading.Tasks;
+    using MassTransit;
+    using MassTransitTestCommon;
+
+
     class Program
     {
         static void Main(string[] args)
-        {            
+        {
             var busControl = Bus.Factory.CreateUsingRabbitMq(cfg =>
-           {
-               var host = cfg.Host(new Uri(ConfigurationManager.AppSettings["ServerUri"]), h =>
-               {
-                   h.Username(ConfigurationManager.AppSettings["Username"]);
-                   h.Password(ConfigurationManager.AppSettings["Password"]);
-               });
+            {
+                var host = cfg.Host(new Uri(ConfigurationManager.AppSettings["ServerUri"]), h =>
+                {
+                    h.Username(ConfigurationManager.AppSettings["Username"]);
+                    h.Password(ConfigurationManager.AppSettings["Password"]);
+                });
 
-               var reply = bool.Parse(ConfigurationManager.AppSettings["Reply"] ?? "false");
+                var reply = bool.Parse(ConfigurationManager.AppSettings["Reply"] ?? "false");
+                var prefetchCount = ushort.Parse(ConfigurationManager.AppSettings["PrefetchCount"] ?? "50");
 
-               var queueName = !reply ? "masstransit_message_service" : "masstransit_message_service_rpc";
-               cfg.ReceiveEndpoint(host, queueName, e =>
-               {
-                   e.AutoDelete = true; 
-                   e.Durable = false;
-                   e.PrefetchCount = 50;
-                   e.Consumer<MessageConsumer>();
-               });
-           });
+                var queueName = !reply ? "masstransit_message_service" : "masstransit_message_service_rpc";
+                cfg.ReceiveEndpoint(host, queueName, e =>
+                {
+                    e.AutoDelete = true;
+                    e.Durable = false;
+                    e.PrefetchCount = prefetchCount;
+                    e.Consumer<MessageConsumer>();
+                });
+            });
 
             busControl.Start();
 
@@ -40,13 +42,11 @@ namespace MassTransitTestServer
 
     public class MessageConsumer : IConsumer<Message>
     {
-        private static bool reply = bool.Parse(ConfigurationManager.AppSettings["Reply"] ?? "false");
-
         public async Task Consume(ConsumeContext<Message> context)
         {
-            if (reply)
+            if (context.ResponseAddress != null)
             {
-                await context.RespondAsync(new Message { Body = BodyGenerator.GetNext() });
+                context.Respond(new Message {Body = BodyGenerator.GetNext()});
             }
         }
     }

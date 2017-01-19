@@ -13,21 +13,25 @@ namespace NServiceBusTestClient
         static void Main(string[] args)
         {
             LogManager.Use<DefaultFactory>().Level(LogLevel.Fatal); //Comment out to see log messages
-            BusConfiguration busConfiguration = new BusConfiguration();
-            busConfiguration.EndpointName("nservicebus_test_client");
+            EndpointConfiguration busConfiguration = new EndpointConfiguration("nservicebus_test_client");
             busConfiguration.UseTransport<RabbitMQTransport>()
-                .ConnectionString(ConfigurationManager.AppSettings["ServerConnectionString"]);
+                .ConnectionString(ConfigurationManager.AppSettings["ServerConnectionString"])
+                .PrefetchCount(50)
+                .UsePublisherConfirms(false);
             busConfiguration.UseSerialization<JsonSerializer>();
             busConfiguration.UsePersistence<InMemoryPersistence>();
             busConfiguration.EnableInstallers();
             busConfiguration.DisableDurableMessages();
-            busConfiguration.DiscardFailedMessagesInsteadOfSendingToErrorQueue();
+            busConfiguration.SendFailedMessagesTo("poop2");
+//            busConfiguration.DiscardFailedMessagesInsteadOfSendingToErrorQueue();
 
             bool expectReply = Boolean.Parse(ConfigurationManager.AppSettings["ExpectReply"]);
             var taskCount = Int32.Parse(ConfigurationManager.AppSettings["NoOfThreads"]);
             var iterationsPerTask = Int32.Parse(ConfigurationManager.AppSettings["MessagesPerThread"]);
 
-            IBus bus = Bus.Create(busConfiguration).Start();
+            var startableBus = Endpoint.Create(busConfiguration).Result;
+
+            var bus = startableBus.Start().Result;
 
 
             Task[] tasks = new Task[taskCount];
@@ -42,7 +46,8 @@ namespace NServiceBusTestClient
 
                         if (expectReply)
                         {
-                            bus.Send("nservicebus_test_service", msg).Register((m) => { }).Wait();
+                            
+//                            bus.Send("nservicebus_test_service", msg).Register((m) => { }).Wait();
                         }
                         else
                         {
@@ -67,7 +72,8 @@ namespace NServiceBusTestClient
             Console.WriteLine("Total time: " + watch.Elapsed);
 
             Console.ReadKey();
-            bus.Dispose();
+
+            bus.Stop().Wait();
 
 
         }
