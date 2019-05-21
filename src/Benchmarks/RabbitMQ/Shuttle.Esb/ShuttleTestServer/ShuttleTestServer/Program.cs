@@ -3,7 +3,7 @@ using Ninject;
 using Shuttle.Core.Ninject;
 using Shuttle.Esb;
 
-namespace MassTransitTestServer
+namespace ShuttleTestServer
 {
     class Program
     {

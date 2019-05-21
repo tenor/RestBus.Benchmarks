@@ -7,8 +7,8 @@
     <ProjectGuid>{E8B4F3B5-6D59-446C-8AEB-E6F97CFD4A33}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>MassTransitTestServer</RootNamespace>
-    <AssemblyName>MassTransitTestServer</AssemblyName>
+    <RootNamespace>ShuttleTestServer</RootNamespace>
+    <AssemblyName>ShuttleTestServer</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />
@@ -156,7 +156,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\ShuttleTestCommon\ShuttleTestCommon.csproj">
       <Project>{a0047cc9-2ce7-443d-a205-059ef09733bb}</Project>
-      <Name>MassTransitTestCommon</Name>
+      <Name>ShuttleTestCommon</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

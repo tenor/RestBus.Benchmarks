@@ -1,7 +1,7 @@
 ﻿using Shuttle.Esb;
 using ShuttleTestCommon;
 
-namespace MassTransitTestClient
+namespace ShuttleTestClient
 {
     public class MessageHandler : IMessageHandler<Message>
     {

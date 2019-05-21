@@ -7,7 +7,7 @@ using Shuttle.Core.Ninject;
 using Shuttle.Esb;
 using ShuttleTestCommon;
 
-namespace MassTransitTestClient
+namespace ShuttleTestClient
 {
     internal class Program
     {

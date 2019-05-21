@@ -2,7 +2,7 @@
 using System.Configuration;
 using System.Threading;
 
-namespace MassTransitTestClient
+namespace ShuttleTestClient
 {
     public static class BodyGenerator
     {
